@@ -21,4 +21,16 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect({ message: 'Hello from nest.js!' });
   });
+
+  it('/data (POST)', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/data')
+      .send({ name: 'John' })
+      .expect(201);
+
+    expect(response.body).toEqual({
+      message: 'Data received!',
+      received: { name: 'John' },
+    });
+  });
 });
